@@ -1,7 +1,11 @@
 import SearchBar from "../SearchBar/SearchBar"
-import { useNavigate, Link } from "react-router-dom"; 
+import { useNavigate, useLocation, Link } from "react-router-dom"; 
 
 const Navbar = ({onSearch}) => {
+    const location = useLocation();
+    const isFormRoute = location.pathname === '/';
+    
+    if (isFormRoute)return null;
 
     const navigate = useNavigate();
     return (

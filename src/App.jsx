@@ -1,16 +1,34 @@
 import style from './App.module.css';
-import { Routes, Route } from 'react-router-dom'; 
+import { Routes, Route, useNavigate } from 'react-router-dom'; 
 import Cards from './components/Cards/Cards.jsx';
 import About from './components/about/About.jsx';
 import Navbar from './components/navBar/Navbar.jsx';
 import Detail from './components/detail/Detail.jsx';
 import Error from './components/error/Error.jsx';
-import { useState } from 'react';
+import Form from './components/form/Form.jsx';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function App() {
 
+   const navigate = useNavigate();
+
    const [characters, setCharacters] = useState([]);
+   const [access, setAccess] = useState(false);
+
+   const EMAIL = 'juanma.baal@gmail.com'
+   const PASSWORD = 'HERACLITO8';
+
+   function login(userData){
+      if(userData.password === PASSWORD && userData.email === EMAIL){
+         setAccess(true);
+         navigate('/home');
+      }
+   }
+
+   useEffect(() => {
+      !access && navigate('/')
+   }, [access])
 
    const onSearch = (id) => {
       axios(`https://rym2.up.railway.app/api/character/${id}?key={tuApiKey}`).then(
@@ -53,6 +71,7 @@ function App() {
             </Route>
             <Route path='/about' element={<About/>}></Route>
             <Route path='/detail/:id' element={<Detail/>}></Route>
+            <Route path='/' element={<Form login ={login}/>}></Route>
             <Route path='*' element={<Error/>}></Route>
          </Routes>
       </div>
