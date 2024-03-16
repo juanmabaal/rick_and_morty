@@ -13,6 +13,7 @@ const Navbar = ({onSearch}) => {
             <button onClick={()=> navigate(-1)}>Atras</button>
             <button onClick={()=> navigate('/home')}>Home</button>
             <button onClick={()=> navigate('/about')}>About</button>
+            <button onClick={()=> navigate('/favorites')}>Favorites</button>
             <SearchBar onSearch={onSearch}/>  
         </nav>
     )

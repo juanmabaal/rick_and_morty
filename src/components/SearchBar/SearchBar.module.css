@@ -1,5 +1,6 @@
 .containerSearchBar {
     margin-top: 10px;
+    align-items: end;
 }
 .inputSearch {
     padding: 6px;
@@ -8,7 +9,8 @@
     /* background-image: linear-gradient(to bottom,  #74ACDF, #ffffff); */
     box-shadow: 3px 0 10px #ffdf2c;
     transition: box-shadow 0.3s ease;
-}
+}  
+
 
 .input:focus{
     outline: none;
