@@ -38,7 +38,7 @@ server.use((req, res, next) => {
  });
 
 server.use(express.json());
-server.use('/rickandmorty', router); //AGREGA UN ESTADO INICIAL A LA CONSULTA
+server.use('/rickandmorty', router); //AGREGA UN ESTADO INICIAL A LA CONSULTA1
 
 server.listen (PORT, () => {
     console.log('Server raised in port: ' + PORT);

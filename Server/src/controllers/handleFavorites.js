@@ -6,7 +6,7 @@ const postFav = (req, res) => {
     return res.json(myFavorites);
 }
 
-const deletFav = (req, res) => {
+const deleteFav = (req, res) => {
     const { id } = req.params;
 
     const deleteChar = myFavorites.filter ((char) => {
@@ -18,4 +18,4 @@ const deletFav = (req, res) => {
     return res.json(myFavorites)
 }
 
-module.exports = { postFav, myFavorites }
+module.exports = { postFav, deleteFav }
