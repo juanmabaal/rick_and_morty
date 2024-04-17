@@ -19,39 +19,77 @@ function App() {
 
  
 
-   function login(userData){
+   // function login(userData){
 
-      const { email, password } = userData;
-      const URL = 'http://localhost:3001/rickandmorty/login/';
+   //    const { email, password } = userData;
+   //    const URL = 'http://localhost:3001/rickandmorty/login/';
       
-       axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
-         const { access } = data;
-         setAccess(data);
-         access && navigate('/home');
-      });
+   //     axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
+   //       const { access } = data;
+   //       setAccess(data);
+   //       access && navigate('/home');
+   //    });
        
+   // }
+
+   async function login(userData){
+
+      try{
+         const { email, password } = userData;
+            const URL = 'http://localhost:3001/rickandmorty/login/';
+            
+            const { data } = await axios(URL + `?email=${email}&password=${password}`)
+
+               setAccess(data.access);
+               access && navigate('/home');
+             
+      }
+      catch(error){
+         window.alert('Usuario o contraeña incorrectos')
+      }
    }
 
    useEffect(() => {
       !access && navigate('/')
    }, [access])
 
-   const onSearch = (id) => {
-      axios(`http://localhost:3001/rickandmorty/character/${id}`).then(
-         ({ data }) => {
-            if (data.id) {
-               const isCharacterExist = characters.some(character => character.id === data.id);
-               if(!isCharacterExist)   { 
-                  setCharacters((characters) => [...characters, data])
-               }else {
-                  window.alert('Este personaje ya existe en la Lista!');
-               }
-            } else {
-               window.alert('¡No hay personajes con este ID!');
-            }
+   async function onSearch (id) {
+
+      try{
+         const { data } = await axios(`http://localhost:3001/rickandmorty/character/${id}`)
+         if (data.id) {
+                  const isCharacterExist = characters.some(character => character.id === data.id);
+                  if(!isCharacterExist)   { 
+                           setCharacters((oldChars) => [...oldChars, data]);
+                  }else {
+                           window.alert('Este personaje ya existe en la Lista!');
+                   }
+
+         
          }
-      );
+      }
+      catch(error){
+         window.alert('¡No hay personajes con este ID!');
+      }
    }
+      
+      // const onSearch = (id) => {
+      //    axios(`http://localhost:3001/rickandmorty/character/${id}`).then(
+      //       ({ data }) => {
+      //          if (data.id) {
+      //             const isCharacterExist = characters.some(character => character.id === data.id);
+      //             if(!isCharacterExist)   { 
+      //                setCharacters((characters) => [...characters, data])
+      //             }else {
+      //                window.alert('Este personaje ya existe en la Lista!');
+      //             }
+      //          } else {
+      //             window.alert('¡No hay personajes con este ID!');
+      //          }
+      //       }
+      //    );
+      // }
+   
    const onClose = (idString) =>{
       const id = parseInt(idString);
       const updateCharacters = characters.filter(character => character.id !== id);
@@ -75,12 +113,14 @@ function App() {
                </>
                }>              
             </Route>
-            <Route path='/about' element={<About/>}></Route>
-            <Route path='/detail/:id' element={<Detail/>}></Route>
-            <Route path='/favorites' element={<FavoritesView/>}></Route>
-            <Route path='/' element={<Form login ={login}/>}></Route>
-            <Route path='*' element={<Error/>}></Route>
+               <Route path='/about' element={<About/>}></Route>
+               <Route path='/favorites' element={<FavoritesView/>}></Route>
+               <Route path='/detail/:id' element={<Detail/>}></Route>
+               
+               <Route path='/' element={<Form login ={login}/>}></Route>
+               <Route path='*' element={<Error/>}></Route>
          </Routes>
+        
       </div>
 
    );

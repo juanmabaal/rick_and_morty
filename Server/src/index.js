@@ -22,6 +22,7 @@ const express = require('express');
 const server = express();
 const PORT = 3001;
 const router = require('./routes/index');
+const morgan = require('morgan')
 
 server.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -37,6 +38,7 @@ server.use((req, res, next) => {
     next();
  });
 
+ server.use(morgan('dev'));
 server.use(express.json());
 server.use('/rickandmorty', router); //AGREGA UN ESTADO INICIAL A LA CONSULTA1
 

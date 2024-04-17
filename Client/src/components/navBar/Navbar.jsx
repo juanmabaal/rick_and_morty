@@ -1,5 +1,5 @@
 import SearchBar from "../SearchBar/SearchBar"
-import { useNavigate, useLocation, Link } from "react-router-dom"; 
+import { useNavigate, useLocation} from "react-router-dom"; 
 
 const Navbar = ({onSearch}) => {
     const location = useLocation();
