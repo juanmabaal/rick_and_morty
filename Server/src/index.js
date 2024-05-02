@@ -1,6 +1,26 @@
+require("./DB_connection");
+
 const server = require('./server')
 const PORT = 3001;
+const { conn } = require("./DB_connection");
 
-server.listen (PORT, () => {
-    console.log('Server raised in port: ' + PORT);
+// try {
+//     server.listen (PORT, async () => {
+//         console.log('Server raised in port: ' + PORT);
+//         await conn.sync({})
+//     })
+
+// } catch (error) {
+//     console.log(error)
+// }
+
+conn
+.sync({force: false})
+.then(() => {
+    server.listen(PORT, async () => {
+        console.log("Server raised in port: " + PORT);
+    });
 })
+.catch((error) => {
+    console.log(error)
+});
