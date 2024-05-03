@@ -3,7 +3,7 @@ const server = express();
 
 const router = require('./routes/index');
 
-const morgan = require('morgan')
+const morgan = require('morgan');
 
 server.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
