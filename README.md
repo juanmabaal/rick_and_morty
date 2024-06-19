@@ -84,6 +84,6 @@ Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo [LICENS
 
 Para consultas, sugerencias o comentarios, por favor contacta a:
 
-#### Juan Manuel Balgauera Alvira 
+#### Juan Manuel Balaguera Alvira 
 [Correo Electrónico](juanma.baal@gmail.com/)  
 [LinkedIn](https://www.linkedin.com/in/juan-manuel-balaguera-alvira/)
